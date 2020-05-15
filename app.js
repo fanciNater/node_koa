@@ -28,6 +28,8 @@ app.use(require('koa-static')(__dirname + '/public'))
 // routes
 // app.use(index.routes(), index.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())
+
+// 调用编写的登录插件
 app.use(login.routes());
 
 // error-handling
