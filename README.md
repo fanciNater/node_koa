@@ -8,3 +8,10 @@
  `npm install`或者`cnpm install`
 ## 启动项目
  `npm run start`
+## JWT认证
+ #### 下载实现jwt的包
+ `npm i jsonwebtoken --save`
+ #### 下载验证jwt的koa中间价
+ `npm i koa-jwt --save`
+ #### 实现JWT认证
+ 

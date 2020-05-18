@@ -1,6 +1,8 @@
 const router = require("koa-router")();
 const LoginServie = require("../services/login.service");
 const RespJson = require("../config/RespJson");
+const jwt = require('jsonwebtoken')
+const token = require("../utils/jwtUtil")
 
 /**
  * @author fanciNate
@@ -14,7 +16,7 @@ router.post("/login", async (ctx, next) => {
     try {
         console.log(result);
         if (result.length === 1) {
-            ctx.body = new RespJson("ok", "登录成功");
+            ctx.body = new RespJson("ok", "登录成功", token.createToken(params, 60 * 1000));
         } else {
             ctx.body = new RespJson("error", "账号或密码错误，请重试");
         }
