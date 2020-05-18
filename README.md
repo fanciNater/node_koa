@@ -8,6 +8,3 @@
  `npm install`或者`cnpm install`
 ## 启动项目
  `npm run start`
- 
-### 请求
-## POST请求
