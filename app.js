@@ -8,9 +8,19 @@ const jwt = require('jsonwebtoken')
 const jwtKoa = require('koa-jwt')
 const token = require('./utils/jwtUtil')
 const RespJson = require('./config/RespJson');
+const fs = require('fs');
+const path = require('path');
 
 const login = require("./routes/login");
+const upload = require("./routes/upload");
 
+const koaBody = require('koa-body');
+app.use(koaBody({
+    multipart: true,
+    formidable: {
+        maxFileSize: 200*1024*1024    // 设置上传文件大小最大限制，默认2M
+    }
+}));
 app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*');
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
@@ -30,32 +40,33 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+// app.use(require('koa-static')(__dirname + '/public/files'))
 
 // logger
-app.use(async (ctx, next) => {
-  const start = new Date()
-  await next()
-  const ms = new Date() - start
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-})
+// app.use(async (ctx, next) => {
+//   const start = new Date()
+//   await next()
+//   const ms = new Date() - start
+//   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+// })
 
 // 调用编写的登录插件
 app.use(login.routes());
+app.use(upload.routes());
 
 // JWT拦截器
-app.use(async (ctx, next) => {
-  let authToken = null;
-  if (ctx.request.header && ctx.request.header.authtoken) {
-    authToken = ctx.request.header.authtoken;
-  }
-  if (token.checkToken(authToken)) {
-    ctx.status = 401;
-    ctx.body = "tolen已失效，请重新登录";
-  } else {
-    await next();
-  }
-})
+// app.use(async (ctx, next) => {
+//   let authToken = null;
+//   if (ctx.request.header && ctx.request.header.authtoken) {
+//     authToken = ctx.request.header.authtoken;
+//   }
+//   if (token.checkToken(authToken)) {
+//     ctx.status = 401;
+//     ctx.body = "tolen已失效，请重新登录";
+//   } else {
+//     await next();
+//   }
+// })
 
 // error-handling
 app.on('error', (err, ctx) => {
