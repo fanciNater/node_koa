@@ -9,8 +9,8 @@ class LoginService {
     checkUser(params) {
         return new Promise((resolve, reject) => {
             let conn = mysqlConfig.getConn();
-            let sqlStr = `select * from user_info where user_name=? and user_pwd=?`;
-            conn.query(sqlStr, [params.user_name, params.user_pwd], (err, result) => {
+            let sqlStr = `select * from user_info where user_name=? and password=?`;
+            conn.query(sqlStr, [params.userName, params.password], (err, result) => {
                 if (err) {
                     reject(err);
                 } else {
