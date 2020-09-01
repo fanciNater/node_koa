@@ -4,7 +4,7 @@ class mysqlConfig {
     static getConn() {
         let conn = mysql.createConnection({
             user: "root",
-            password: "",
+            password: "123456",
             database: "demo",
             host: "127.0.0.1",
             port: "3306"
