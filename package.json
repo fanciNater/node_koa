@@ -2,6 +2,7 @@
   "name": "{{name}}",
   "version": "0.1.0",
   "private": true,
+  "author": "{{author}}",
   "description": "{{description}}",
   "scripts": {
     "start": "node bin/www",
