@@ -1,7 +1,8 @@
 {
-  "name": "node_koa",
+  "name": "{{name}}",
   "version": "0.1.0",
   "private": true,
+  "description": "{{description}}",
   "scripts": {
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
