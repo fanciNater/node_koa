@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-14 17:52:31
+ * @LastEditTime: 2020-12-26 14:20:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/app.js
+ */
 const Koa = require('koa')
 const app = new Koa()
 const json = require('koa-json')
@@ -13,6 +21,7 @@ const path = require('path');
 
 const login = require("./routes/login");
 const upload = require("./routes/upload");
+const example = require("./routes/example")
 
 const koaBody = require('koa-body');
 app.use(koaBody({
@@ -53,6 +62,7 @@ app.use(logger())
 // 调用编写的登录插件
 app.use(login.routes());
 app.use(upload.routes());
+app.use(example.routes());
 
 // JWT拦截器
 // app.use(async (ctx, next) => {

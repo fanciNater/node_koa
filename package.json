@@ -1,9 +1,9 @@
 {
-  "name": "{{name}}",
+  "name": "koa_demo",
   "version": "0.1.0",
   "private": true,
-  "author": "{{author}}",
-  "description": "{{description}}",
+  "author": "fanciNate",
+  "description": "koa_demo",
   "scripts": {
     "start": "node bin/www",
     "dev": "./node_modules/.bin/nodemon bin/www",
