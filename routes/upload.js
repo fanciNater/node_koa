@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-22 17:38:48
- * @LastEditTime: 2020-12-27 15:43:39
+ * @LastEditTime: 2020-12-27 15:56:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/routes/upload.js
@@ -24,7 +24,7 @@ router.post("/uploadAttachment", async (ctx, next) => {
     // 创建可读流
     const reader = fs.createReadStream(file.path);
     // let filePath = path.join(__dirname, '../public/files') + `/${file.name}`;
-    let filePath = `${host}/wucan/koa/node-koa/public/files/${file.name}`;
+    let filePath = `${host}/public/files/${file.name}`;
     // 创建可写流
     const upStream = fs.createWriteStream(filePath);
     // 可读流通过管道写入可写流
