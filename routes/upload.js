@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-22 17:38:48
- * @LastEditTime: 2020-12-27 15:56:08
+ * @LastEditTime: 2020-12-27 16:01:54
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/routes/upload.js
@@ -18,19 +18,18 @@ const path = require("path");
  * @description 登录路由
  */
 router.post("/uploadAttachment", async (ctx, next) => {
-    const host = ctx.request.header.host;
     let uploadService = new UploadService();
     let file = ctx.request.files.file;
     // 创建可读流
     const reader = fs.createReadStream(file.path);
-    // let filePath = path.join(__dirname, '../public/files') + `/${file.name}`;
-    let filePath = `${host}/public/files/${file.name}`;
+    let filePath = path.join(__dirname, '../public/files') + `/${file.name}`;
     // 创建可写流
     const upStream = fs.createWriteStream(filePath);
+    const host = ctx.request.header.host;
     // 可读流通过管道写入可写流
     reader.pipe(upStream);
     try {
-        let result = await uploadService.upload(filePath);
+        let result = await uploadService.upload(`${host}filePath`);
         if (result.affectedRows) {
             let queryFile = await uploadService.queryUploadFile(result.insertId)
             console.log('result', queryFile)
