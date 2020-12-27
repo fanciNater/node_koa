@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-22 17:38:48
- * @LastEditTime: 2020-12-27 16:01:54
+ * @LastEditTime: 2020-12-27 16:04:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/routes/upload.js
@@ -29,7 +29,7 @@ router.post("/uploadAttachment", async (ctx, next) => {
     // 可读流通过管道写入可写流
     reader.pipe(upStream);
     try {
-        let result = await uploadService.upload(`${host}filePath`);
+        let result = await uploadService.upload(`${host}${filePath}`);
         if (result.affectedRows) {
             let queryFile = await uploadService.queryUploadFile(result.insertId)
             console.log('result', queryFile)
