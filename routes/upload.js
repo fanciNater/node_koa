@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-22 17:38:48
+ * @LastEditTime: 2020-12-27 11:35:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/routes/upload.js
+ */
 const router = require("koa-router")();
 const RespJson = require("../config/RespJson");
 const UploadService = require("../services/upload.service");
@@ -11,7 +19,6 @@ const path = require("path");
  */
 router.post("/uploadAttachment", async (ctx, next) => {
     let uploadService = new UploadService();
-    console.log("文件");
     let file = ctx.request.files.file;
     // 创建可读流
     const reader = fs.createReadStream(file.path);
@@ -20,12 +27,14 @@ router.post("/uploadAttachment", async (ctx, next) => {
     const upStream = fs.createWriteStream(filePath);
     // 可读流通过管道写入可写流
     reader.pipe(upStream);
-    // let fileFlag = await uploadService.searchFile(filePath);
-    // console.log(fileFlag);
-    let result = await uploadService.upload(filePath);
     try {
+        let result = await uploadService.upload(filePath);
         if (result.affectedRows) {
-            ctx.body = new RespJson("ok", "上传成功");
+            let queryFile = await uploadService.queryUploadFile(result.insertId)
+            console.log('result', queryFile)
+            ctx.body = new RespJson("ok", "上传成功", {
+                attachmentUrl: queryFile[0].file_name
+            });
         } else {
             ctx.body = new RespJson("error", "上传失败");
         }

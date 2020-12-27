@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-05-18 18:25:22
- * @LastEditTime: 2020-12-26 15:35:52
- * @LastEditors: your name
+ * @LastEditTime: 2020-12-26 17:10:42
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /vsCodeProjects/demo/nodeJs/node_koa/config/mysql_config.js
  */
@@ -14,7 +14,7 @@ class mysqlConfig {
             user: "root",
             password: "123456",
             database: "demo",
-            host: "127.0.0.1",
+            host: "47.114.52.172",
             port: "3306"
         });
         conn.connect();
